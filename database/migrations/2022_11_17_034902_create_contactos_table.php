@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('mail',100);
             $table->bigInteger('telefono');
             $table->text('mensaje');
-            $table->boolean('mail_enviado');
+            $table->boolean('mail_enviado')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

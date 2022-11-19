@@ -3,83 +3,109 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contacto;
-use Illuminate\Http\Request;
+use App\Http\Requests\ContactoRequest;
 
 class ContactoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Devuelve el listado de los contactos historicos
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function obtenerContactos()
     {
-        //
+        $contactos = Contacto::all();
+        $data = $contactos->map(function ($contacto){
+            return [
+                'id' => $contacto->id,
+                'nombre' => $contacto->nombre,
+                'mail' => $contacto->mail,
+                'telefono' => $contacto->telefono,
+                'mensaje'=> $contacto->mensaje,
+                'created_at' => $contacto->created_at->toDateTimeString(),
+                'updated_at' => $contacto->updated_at->toDateTimeString()
+            ];
+        });
+
+        return response()->json([
+            'mensaje' => 'Listado de contactos historico',
+            'data' => $data
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * Obtiene la informacion de la DB del contacto definido
+     * 
+     * @param id , id del contacto que se quiere identificar
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function obtenerContacto($id)
     {
-        //
+        $contacto = Contacto::findOrFail($id);
+
+        return response()->json([
+            'mensaje' => 'Contacto',
+            'data' => $contacto
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda un nuevo contacto en la base de datos
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function insertarContacto(ContactoRequest $request)
+    {     
+        $nuevoContacto = Contacto::create([
+            'nombre' => $request['nombre'],
+            'mail' => $request['mail'],
+            'telefono' => $request['telefono'],
+            'mensaje' => $request['mensaje']
+        ]);
+
+        return response()->json([
+            'mensaje' => 'Se agrego correctamente el contacto',
+            'data' => $nuevoContacto
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * Actualiza el contacto que tiene $id, los campos son obligatorios
      *
-     * @param  \App\Models\Contacto  $contacto
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Contacto $contacto)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contacto  $contacto
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contacto $contacto)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
+     * @param id , id del contacto
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contacto $contacto)
+    public function actualizaContacto($id, ContactoRequest $request)
     {
-        //
+        $contacto = Contacto::find($id);
+        $contacto->nombre = $request['nombre'];
+        $contacto->mail = $request['mail'];
+        $contacto->telefono = $request['telefono'];
+        $contacto->mensaje = $request['mensaje'];
+        $contacto->save();
+
+        return response()->json([
+            'mensaje' => 'Datos del contacto modificados',
+            'data' => $contacto
+        ]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Borra Logicamente el contacto segun su id
      *
-     * @param  \App\Models\Contacto  $contacto
+     * @param  id , id del contacto que se desea borrar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contacto $contacto)
+    public function borrarContacto($id)
     {
-        //
+        $contacto = Contacto::findOrFail($id);
+        $contacto->delete();
+
+        return response()->json([
+            'mensaje' => 'Contacto',
+            'data' => $contacto
+        ]);
     }
 }
