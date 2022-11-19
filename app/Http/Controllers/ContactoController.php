@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contacto;
 use App\Http\Requests\ContactoRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NuevoContacto;
 
 class ContactoController extends Controller
 {
@@ -64,6 +66,13 @@ class ContactoController extends Controller
             'mensaje' => $request['mensaje']
         ]);
 
+        $details = [
+            'title' => 'Se ha recibido un nuevo contacto',
+            'body' =>   $nuevoContacto
+        ];
+
+        self::enviarMail($details);
+
         return response()->json([
             'mensaje' => 'Se agrego correctamente el contacto',
             'data' => $nuevoContacto
@@ -107,5 +116,14 @@ class ContactoController extends Controller
             'mensaje' => 'Contacto',
             'data' => $contacto
         ]);
+    }
+
+    /**
+     * Hace el envio de mail
+     */
+
+    private function enviarMail($details)
+    {
+        Mail::to('carlosoller1994@gmail.com')->send(new NuevoContacto($details));
     }
 }
