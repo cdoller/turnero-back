@@ -67,7 +67,7 @@ class ContactoController extends Controller
         ]);
 
         $details = [
-            'title' => 'Se ha recibido un nuevo contacto',
+            'title' => 'Recibiste un nuevo contacto',
             'body' =>   $nuevoContacto
         ];
 

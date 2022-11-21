@@ -59,10 +59,26 @@
             font-family: Arial, Helvetica, sans-serif;
             font-weight: 600;
         }
-        h3{
+        header h3{
             margin-left: 20px;
             font-size: 1.2em;
         }
+
+        @media (max-width: 500px) {
+            .content {
+                width: 90vw;
+            }
+
+            header{
+                padding-left: 10px;
+            }
+
+            section h1{
+            padding: 30px 0px;
+            font-size: 2.2em;
+            }        
+        }
+</style>
     </style>
 </head>
 <div class="content">
@@ -72,8 +88,8 @@
     </header>
     <section>
         <h1>{{ $details['body']->nombre }}</h1>
-        <h2>{{ $details['body']->mail }}</h2>
         <h2>{{ $details['body']->telefono }}</h2>
+        <h3>{{ $details['body']->mail }}</h3>
         <p> {{ $details['body']->mensaje }}</p>
     </section>
 
