@@ -120,6 +120,7 @@ class ContactoController extends Controller
 
     /**
      * Hace el envio de mail
+     * @param details son los detalles que va a tener el mail
      */
 
     private function enviarMail($details)

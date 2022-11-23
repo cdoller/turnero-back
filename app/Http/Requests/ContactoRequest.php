@@ -30,4 +30,20 @@ class ContactoRequest extends FormRequest
             'mensaje'=> ['required'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El nombre es un campo obligatorio.',
+            'nombre.max' => 'La longitud maxima del nombre es 100 caracteres.',
+            'nombre.min' => 'La longitud minima del nombre es 2 caracteres',
+            'mail.required' => 'El mail es un campo obligatorio.',
+            'mail.email' => 'El formato del mail no es el adecuado Ejemplo: jperez@mail.com',
+            'mail.max' => 'La longitud maxima del mail es 100 caracteres.',
+            'telefono.required' => 'El telefono es un campo obligatorio.',
+            'telefono.numeric' => 'El telefono es un campo que solo puede tener numeros.',
+            'telefono.gt' => 'El telefono tiene que tener al menos 7 digitos.',
+            'mensaje.required' => 'El mensaje es un campo obligatorio.'
+        ];
+    }
 }
