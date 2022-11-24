@@ -25,7 +25,7 @@ class ContactoRequest extends FormRequest
     {
         return [
             'nombre' => ['required','max:100','min:2'],
-            'mail' => ['required','email:rfc,dns','max:100'],
+            'mail' => ['required','max:100'],
             'telefono' => ['required','numeric', 'gt:999999'],
             'mensaje'=> ['required'],
         ];
@@ -38,7 +38,6 @@ class ContactoRequest extends FormRequest
             'nombre.max' => 'La longitud maxima del nombre es 100 caracteres.',
             'nombre.min' => 'La longitud minima del nombre es 2 caracteres',
             'mail.required' => 'El mail es un campo obligatorio.',
-            'mail.email' => 'El formato del mail no es el adecuado Ejemplo: jperez@mail.com',
             'mail.max' => 'La longitud maxima del mail es 100 caracteres.',
             'telefono.required' => 'El telefono es un campo obligatorio.',
             'telefono.numeric' => 'El telefono es un campo que solo puede tener numeros.',

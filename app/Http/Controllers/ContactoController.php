@@ -58,7 +58,7 @@ class ContactoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function insertarContacto(Request $request)
+    public function insertarContacto(ContactoRequest $request)
     {     
         $nuevoContacto = Contacto::create([
             'nombre' => $request['nombre'],
@@ -127,5 +127,13 @@ class ContactoController extends Controller
     private function enviarMail($details)
     {
         Mail::to('carlosoller1994@gmail.com')->send(new NuevoContacto($details));
+    }
+
+    public function prueba()
+    {
+        return response()->json([
+            'message'=> 'Prueba ejecutada correctamente',
+            'data'=> 'data data data'
+        ]);
     }
 }

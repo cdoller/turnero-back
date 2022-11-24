@@ -39,3 +39,5 @@ Route::put('actualizaContacto/{id}', [ContactoController::class, 'actualizaConta
 /*****DELETE*****/
 //Ruta para hacer un borrado logico de una contacto identificado con el id
 Route::delete('borrarContacto/{id}', [ContactoController::class, 'borrarContacto']);
+
+Route::get('prueba', [ContactoController::class, 'prueba']);
