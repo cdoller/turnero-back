@@ -72,7 +72,7 @@ class ContactoController extends Controller
             'body' =>   $nuevoContacto
         ];
 
-        //self::enviarMail($details);
+        self::enviarMail($details);
 
         return response()->json([
             'mensaje' => 'Se agrego correctamente el contacto',
