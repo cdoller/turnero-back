@@ -6,6 +6,7 @@ use App\Models\Contacto;
 use App\Http\Requests\ContactoRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NuevoContacto;
+use GuzzleHttp\Psr7\Request;
 
 class ContactoController extends Controller
 {
@@ -57,7 +58,7 @@ class ContactoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function insertarContacto(ContactoRequest $request)
+    public function insertarContacto(Request $request)
     {     
         $nuevoContacto = Contacto::create([
             'nombre' => $request['nombre'],
