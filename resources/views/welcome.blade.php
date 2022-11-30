@@ -75,7 +75,7 @@
                         <span>POST</span><h4>api/insertarContacto</h4>
                         <p>Se deben pasar los siguientes parametros: nombre, mail, telefono, mensaje</p>
                         <p>nombre: debe tener minimo 2 caracteres y maximo 100</p>
-                        <p>mail: formato de mail con @ y . - longitud maxima 100</p>
+                        <p>mail: formato de mail con @ y . ademas la longitud maxima 100</p>
                         <p>telefono: formato solo numero y minimo 7 digitos</p>
                     </li>
 
